@@ -1,0 +1,24 @@
+export type RootStackParamList = {
+    Dashboard: undefined;
+    PostNewAd: undefined;
+    ManageAds: undefined;
+    PaymentHistory: undefined;
+    Chat: undefined;
+    PackagePricing: undefined;
+    SupportHelp: undefined;
+  };
+  export interface Ad {
+    id: string;
+    name: string;
+    price: string;
+    info: string;
+    bedroom: number;
+    roomLocation: string;
+    district: string;
+    province: string;
+    status: string;
+    views: number;
+    clicks: number;
+    inquiries: number;
+    image: { uri: string }; // Kiểu image với thuộc tính 'uri'
+  }
