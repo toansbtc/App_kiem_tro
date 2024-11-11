@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLayout from './Layout_lord';
+import { TinMoi } from './PostNewAd';
 
 const QuanLyTin = ({ navigation }) => {
   const [danhSachTin, setDanhSachTin] = useState([]);
@@ -24,7 +25,7 @@ const QuanLyTin = ({ navigation }) => {
         <Text>{item.soPhongNgu} phòng ngủ, lầu {item.diaChiPhong}</Text>
         <Text style={styles.roomPrice}>{item.gia} VND</Text>
         <Text style={styles.location}>{item.huyen}, {item.tinh}</Text>
-        <Text style={styles.trangThai}>Trạng thái: {item.trangThai}</Text>
+        <Text style={styles.trangThai}>Trạng thái: {item.xetDuyet === false ? 'Chưa xét duyệt' : 'Đã Duyệt'}</Text>
       </View>
     </TouchableOpacity>
   );

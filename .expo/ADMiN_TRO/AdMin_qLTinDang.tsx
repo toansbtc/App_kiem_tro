@@ -36,7 +36,7 @@ const PostManagementScreen: React.FC<PostManagementScreenProps> = ({ navigation 
 
           if (value.xetDuyet === false) {
 
-            post.push({ id: value.id, title: value.tieuDe, author: value.nguoiDang, approved: value.xetDuyet, description: `Diện tích phòng:${value.dienTich}\n Địa chỉ:${value.diaChiPhong}\n Giá:${value.gia}` })
+            post.push({ id: value.id, title: value.tieuDe, author: JSON.parse(value.nguoiDang).hoTen, approved: value.xetDuyet, description: `Diện tích phòng:${value.dienTich}\n Địa chỉ:${value.diaChiPhong}\n Giá:${value.gia}` })
           }
         })
         setPosts(post)

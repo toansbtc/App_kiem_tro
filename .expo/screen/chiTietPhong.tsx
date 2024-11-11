@@ -46,14 +46,15 @@ const ChiTietPhong = ({ route }) => {
   const [selectedRating, setSelectedRating] = useState<number>(0);
   const navigation = useNavigation<ChiTietPhongScreenProp>(); // Khởi tạo navigation
   // Nhận dữ liệu phòng từ route
-  console.log('dataaaaaaaa', route.params)
   const { room } = route.params
+
 
 
 
 
   // Khởi tạo trạng thái cho việc hiển thị danh sách phòng
   const [showRooms, setShowRooms] = useState<boolean>(false);
+  const [roomImage, setRoomImage] = useState(room.hinhAnh[0]);
   const [activeIndex, setActiveIndex] = useState(0);;
   const [currentRoom, setCurrentRoom] = useState<TinMoi>(room);// Thêm trạng thái cho phòng hiện tại
   const [binhLuan, setBinhLuan] = useState<String[]>([]);
@@ -66,15 +67,18 @@ const ChiTietPhong = ({ route }) => {
   const handleNextImage = () => {
     console.log("Next image")
     setActiveIndex((prevIndex) =>
-      prevIndex === room.immageSlide.length - 1 ? 0 : prevIndex + 1
+      prevIndex === currentRoom.hinhAnh.length - 1 ? 0 : prevIndex + 1
     );
+
+    setRoomImage(currentRoom.hinhAnh[activeIndex])
   };
 
   // Hàm để quay lại ảnh trước đó
   const handlePreviousImage = () => {
     setActiveIndex((prevIndex) =>
-      prevIndex === 0 ? room.immageSlide.length - 1 : prevIndex - 1
+      prevIndex === 0 ? currentRoom.hinhAnh.length - 1 : prevIndex - 1
     );
+    setRoomImage(currentRoom.hinhAnh[activeIndex])
   };
 
 
@@ -147,7 +151,7 @@ const ChiTietPhong = ({ route }) => {
         {/* Ảnh phòng & slider*/}
         {/* Slider ảnh */}
         <View style={styles.sliderContainer}>
-          <Image source={{ uri: room.hinhAnh[0] }} style={styles.image} />
+          <Image source={{ uri: roomImage }} style={styles.image} />
           <View style={styles.sliderButtons}>
             <TouchableOpacity onPress={handlePreviousImage} style={styles.navButton}>
               <Text style={styles.navButtonText}>{"<"}</Text>
@@ -322,9 +326,9 @@ const ChiTietPhong = ({ route }) => {
               // Debugging: Check if the phone number exists
               // console.log("Navigating to Chat with phone number:", currentRoom.p);
               navigation.navigate('Chat', {
-                room: room,
-                innKeeperName: room.InnKeeper_name,
-                innKeeperPhone: room.InnKeeper_Phone, // Ensure this is defined
+                room: currentRoom,
+                innKeeperName: JSON.parse(currentRoom.nguoiDang).hoTen,
+                innKeeperPhone: JSON.parse(currentRoom.nguoiDang).soDienThoai, // Ensure this is defined
 
               });
             }}
@@ -343,8 +347,8 @@ const ChiTietPhong = ({ route }) => {
             />
             <View style={styles.phoneContainer}>
               <Text style={styles.buttonText}>Phone</Text>
-              <TouchableOpacity onPress={() => handlePhonePress(room.InnKeeper_Phone)}>
-                <Text style={styles.phoneNumber}>{room.InnKeeper_Phone}</Text>
+              <TouchableOpacity onPress={() => handlePhonePress(JSON.parse(currentRoom.nguoiDang).soDienThoai)}>
+                <Text style={styles.phoneNumber}>{JSON.parse(currentRoom.nguoiDang).soDienThoai}</Text>
               </TouchableOpacity>
             </View>
           </View>

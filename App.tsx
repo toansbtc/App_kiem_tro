@@ -9,6 +9,8 @@ import Home from './.expo/screen/home';
 import Chat from './.expo/screen/chat';
 import ThongBao from './.expo/screen/thongBao';
 import TaiKhoan from './.expo/screen/taiKhoan';
+import DangNhap from './.expo/screen/dangNhap';
+import DangKy from './.expo/screen/dangKy';
 
 import Dashboard from './.expo/LordLand_screen/Dashboard';
 import PostNewAd from './.expo/LordLand_screen/PostNewAd';
@@ -109,7 +111,11 @@ export default function App() {
         <Stack.Screen name="ThemDV" component={ThemDV} options={{ title: 'Add Service' }} />
         <Stack.Screen name="ChatAdmin" component={ChatAdmin} options={{ title: 'Admin Chat' }} />
         <Stack.Screen name="TaiKhoan" component={TaiKhoan} options={{ title: 'TaiKhoan' }} />
+        <Stack.Screen name="DangNhap" component={DangNhap} options={{ title: 'DangNhap' }} />
+        <Stack.Screen name="DangKy" component={DangKy} options={{ title: 'DangKy' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+

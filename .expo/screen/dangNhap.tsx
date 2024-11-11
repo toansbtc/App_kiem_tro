@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import stylesDn from './styleDN'; // Đảm bảo bạn đã định nghĩa các kiểu ở đây
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types'; // Đảm bảo bạn đã định nghĩa các loại ở đây
+// import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+// import { RootStackParamList } from '../types'; // Đảm bảo bạn đã định nghĩa các loại ở đây
 
-type DangNhapScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  'DangNhap'
->;
+// type DangNhapScreenNavigationProp = NativeStackNavigationProp<
+//   RootStackParamList,
+//   'DangNhap'
+// >;
 
-type Props = {
-  navigation: DangNhapScreenNavigationProp;
-};
+// type Props = {
+//   navigation: DangNhapScreenNavigationProp;
+// };
 
 interface UserData {
   id: string;
@@ -38,11 +38,12 @@ const ADMIN_USER: UserData = {
   Pass: '12345', // Mật khẩu tĩnh cho admin
 };
 
-export default function DangNhap({ navigation }: Props) {
+export default function DangNhap({ navigation }) {
   const [UserName, setUserName] = useState<string>('');
   const [Pass, setPass] = useState<string>('');
 
   const handleLogin = async () => {
+
     if (!UserName || !Pass) {
       Alert.alert('Lỗi', 'Vui lòng nhập tên đăng nhập và mật khẩu.');
       return;
@@ -51,7 +52,8 @@ export default function DangNhap({ navigation }: Props) {
     try {
       const existingUsers = await AsyncStorage.getItem('users');
       const usersArray: UserData[] = existingUsers ? JSON.parse(existingUsers) : [];
-      
+      console.log(await AsyncStorage.getItem('danhSachTin'))
+
       // Thêm tài khoản admin tĩnh vào mảng người dùng
       usersArray.push(ADMIN_USER);
 
@@ -72,7 +74,8 @@ export default function DangNhap({ navigation }: Props) {
         } else if (user.id.startsWith('NT')) {
           navigation.navigate('Home'); // Điều hướng đến Home
         } else if (user.id.startsWith('CT')) {
-          navigation.navigate('ManageAds'); // Điều hướng đến Dashboard
+          // navigation.navigate('ManageAds'); // Điều hướng đến Dashboard
+          navigation.navigate('PostNewAd'); // Điều hướng đến Dashboard
         }
       } else {
         Alert.alert('Lỗi', 'Tài khoản hoặc mật khẩu không đúng.');

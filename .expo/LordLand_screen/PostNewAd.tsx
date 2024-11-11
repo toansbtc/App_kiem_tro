@@ -76,6 +76,7 @@ const DangTinMoi = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const taiHinhAnh = async () => {
+    // await AsyncStorage.clear()
     const ketQua = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsMultipleSelection: true,
@@ -86,11 +87,11 @@ const DangTinMoi = () => {
     }
   };
 
-  const guiTin = async () => {
 
+  const guiTin = async () => {
     const tinMoi: TinMoi = {
       id: Date.now().toString(),
-      nguoiDang: await AsyncStorage.getItem('user'),
+      nguoiDang: await AsyncStorage.getItem('userData'),
       tieuDe,
       gia: giaPhong,
       xa,
@@ -261,7 +262,7 @@ const DangTinMoi = () => {
             <Text style={styles.label}>Số phòng ngủ</Text>
             <TextInput
               style={styles.input}
-              placeholder="Nhập giá quét dọn"
+              placeholder="Số phòng ngủ"
               value={soPhongNgu}
               onChangeText={setSoPhongNgu}
             />
